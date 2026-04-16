@@ -22,3 +22,6 @@ coverage.out
 # OS cruft
 .DS_Store
 
+# Do not ignore source paths that include "fin"
+!cmd/fin/
+
