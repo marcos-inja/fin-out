@@ -1,0 +1,11 @@
+---
+description: Use @agents/ as the canonical agent guidance
+alwaysApply: true
+---
+
+# Use @agents/ guidance
+
+- Treat `@agents/` as the primary source of agent instructions for this repo.
+- When starting work, quickly pick the most relevant profile in `@agents/` (e.g. `builder.md`, `reviewer.md`, `fixer.md`, `financial_planner.md`) based on the user request.
+- Follow that profile’s guidance for workflow, style, and constraints. If multiple profiles apply, prioritize the one that best matches the user’s goal and keep behavior consistent.
+- If `@agents/` conflicts with generic habits, prefer `@agents/`.

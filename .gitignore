@@ -1,0 +1,24 @@
+# Binaries
+fin
+fin.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+dist/
+bin/
+
+# Go build/test artifacts
+*.out
+coverage.out
+*.test
+
+# IDE/editor
+.idea/
+.vscode/
+
+# OS cruft
+.DS_Store
+

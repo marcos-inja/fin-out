@@ -1,0 +1,44 @@
+version: 1
+name: financial_meta
+description: Executable contract for goal projections with compound interest and monthly deposits.
+
+input:
+  target:
+    type: float
+    description: Goal target amount (reference; does not change the period math).
+  deposit:
+    type: float
+    description: Positive monthly deposit applied at the end of each month, after interest on balance.
+  annual_rate:
+    type: float
+    description: Annual rate as a decimal (e.g. 0.14 for 14% per year).
+  months:
+    type: int
+    description: Number of months in the projection (>= 0).
+  minimal:
+    type: bool
+    description: If true, only final_balance; otherwise, full monthly series.
+
+formulas:
+  monthly_rate: "(1 + annual_rate)^(1/12) - 1"
+  monthly_evolution: |
+    For m = 1..months:
+      interest_month = previous_balance * monthly_rate
+      after_interest_balance = previous_balance + interest_month
+      balance = after_interest_balance + deposit
+      deposits_accumulated = previous_deposits_accumulated + deposit
+    previous_balance for month 1 is 0; initial deposits_accumulated is 0.
+
+output:
+  default:
+    - month
+    - deposits_accumulated
+    - interest_month
+    - balance
+  minimal:
+    - final_balance
+
+constraints:
+  - No global state; pure functions.
+  - Deterministic for the same inputs.
+  - annual_rate >= 0; deposit >= 0; months >= 0.
